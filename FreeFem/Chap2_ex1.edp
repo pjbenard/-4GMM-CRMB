@@ -1,0 +1,50 @@
+int n = 50, length = 10.;
+int r0 = length/2.;
+
+real mu1 = 1., mu2 = 0.1;
+real Ku = 5.;
+int base=1,sider=2,top=3,sidel=4;
+
+real[int] xx=length*[-1,1,1,-1],
+          yy=length*[-1,-1,1,1];
+real[int] RC=[r0], XC=[0.], YC=[0.],
+          mu=[mu1,mu2];
+int[int] nn=[n,n,n,n],
+         NC=[pi*n/2],
+         edges=[base, sider, top, sidel];
+
+border Square(t=0,1;i)
+{
+    int ii = (i+1)%4; real t1 = 1-t;
+    x = xx[i]*t1 + xx[ii]*t;
+    y = yy[i]*t1 + yy[ii]*t;
+    label = i+1;
+}
+
+border Circle(t=0,2*pi;i)
+{
+    x = RC[i]*cos(t)+XC[i];
+    y = RC[i]*sin(t)+YC[i];
+    label = 0;
+}
+
+mesh Sh = buildmesh(Square(nn)+Circle(NC));
+
+fespace Vh(Sh,P1);
+Vh u,v;
+//macro u [u1,u2] //
+//macro v [v1,v2] //
+macro grad(u) [dx(u), dy(u)] //
+
+func K= 1. + Sh(x,y).region*(Ku-1.);
+func ud=0.;
+
+problem Heat(u,v)=
+    int2d(Sh)(K*grad(u)'*grad(v))
+    -int1d(Sh,base)(mu[1]*v)
+    +on(top, u=ud);
+
+Heat;
+
+plot(Sh,wait=1);
+plot(u, ps="result.eps");
