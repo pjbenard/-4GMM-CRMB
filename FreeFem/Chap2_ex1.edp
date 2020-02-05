@@ -7,24 +7,27 @@ int base=1,sider=2,top=3,sidel=4;
 
 real[int] xx=length*[-1,1,1,-1],
           yy=length*[-1,-1,1,1];
-real[int] RC=[r0], XC=[0.], YC=[0.],
-          mu=[mu1,mu2];
+real[int] RC=[r0], XC=[0.], YC=[0.];
 int[int] nn=[n,n,n,n],
          NC=[pi*n/2],
          edges=[base, sider, top, sidel];
 
 border Square(t=0,1;i)
 {
-    int ii = (i+1)%4; real t1 = 1-t;
+    int ii = (i+1)%4; 
+    real t1 = 1-t;
+    
     x = xx[i]*t1 + xx[ii]*t;
     y = yy[i]*t1 + yy[ii]*t;
+    
     label = i+1;
 }
 
 border Circle(t=0,2*pi;i)
 {
-    x = RC[i]*cos(t)+XC[i];
-    y = RC[i]*sin(t)+YC[i];
+    x = RC[i]*cos(t) + XC[i];
+    y = RC[i]*sin(t) + YC[i];
+    
     label = 0;
 }
 
@@ -34,7 +37,10 @@ fespace Vh(Sh,P1);
 Vh u,v;
 //macro u [u1,u2] //
 //macro v [v1,v2] //
+macro mu [mu1,mu2] //
 macro grad(u) [dx(u), dy(u)] //
+macro idx2val1(i) (0.1 + 9.9*i/20.) //
+macro idx2val2(i) (-1. + 2.*i/20.) //
 
 func K= 1. + Sh(x,y).region*(Ku-1.);
 func ud=0.;
@@ -44,7 +50,18 @@ problem Heat(u,v)=
     -int1d(Sh,base)(mu[1]*v)
     +on(top, u=ud);
 
-Heat;
+    
+for (int i2=0;i2<=20;i2+=1) {
+    for (int i1=0;i1<=20;i1+=1) {
+        mu1 = idx2val1(i1); mu2 = idx2val2(i2);
+        Ku = mu1;
+        Heat;
+        plot(u, ps="mu2_"+i2+"_mu1_"+i1+".eps", 
+             cmm="mu1 = "+mu1+", mu2 = "+mu2);       
+    }
+}
+    
+//Heat;
 
-plot(Sh,wait=1);
-plot(u, ps="result.eps");
+//plot(Sh,wait=1);
+//plot(u, ps="result.eps");
