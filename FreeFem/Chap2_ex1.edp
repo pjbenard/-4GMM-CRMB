@@ -57,7 +57,7 @@ for (int i2=0;i2<=20;i2+=1) {
         Ku = mu1;
         Heat;
         plot(u, ps="mu2_"+i2+"_mu1_"+i1+".eps", 
-             cmm="mu1 = "+mu1+", mu2 = "+mu2);       
+             cmm="mu1 = "+mu1+", mu2 = "+mu2,value=1,fill=1);       
     }
 }
     
