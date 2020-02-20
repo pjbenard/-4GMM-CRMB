@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+\newtheorem{assum}{Assumption}
 \newtheorem{result}{Result}
 
 \begin{document}
@@ -12,31 +13,77 @@
 This Latex file is a record of all proofs done about the book \cite{hesthaven2016certified}.
 
 \section*{Chapter 2}
+In this chapter, we assume the following:
 
-\begin{result}{Galerkin Orthogonality p.9}
-$$ a\left( u(\mu )-u_{\delta }(\mu ),v_{\delta };\mu \right) = 0, \; \forall v_{\delta } \in \mathbb{V}_{\delta }$$
+\begin{assum}\label{assum:Vvect}
+$\mathbb{V} _\delta$ is a vectorial sub-space of $\mathbb{V}$.
+\end{assum}
+
+\begin{assum}\label{assum:linear}
+$a(\cdot ,\cdot ;\mu )$ is bilinear.
+\end{assum}
+
+\begin{assum}\label{assum:coerc}
+$\forall \mu \in \mathbb{P}\; \exists \alpha (\mu )> 0$ such that $a(u,u;\mu )\geq \alpha (\mu )\|u\|_\mathbb{V}^2$
+\end{assum}
+
+\begin{assum}\label{assum:cont}
+$\forall \mu \in \mathbb{P}\; \exists \gamma(\mu )<\gamma $ such that $a(u,v;\mu )\leq \gamma (\mu )\|u\|_\mathbb{V}\|v\|_\mathbb{V}$
+\end{assum}
+
+Every $\cdot _\delta \in \mathbb{V} _\delta$
+
+\begin{result}{Galerkin Orthogonality p.9}\label{Galer_Orth}
+$$ a\left( u(\mu )-u_\delta (\mu ),v_\delta ;\mu \right) = 0, \; \forall v_\delta  \in \mathbb{V}_\delta $$
 \end{result}
+
 \begin{proof}
 We first remark we constructed:
 \begin{align*}
 a\left ( u(\mu ),v;\mu \right ) =& f(v,\mu ), \; \forall v \in \mathbb{V}\\
-a\left ( u_{\delta }(\mu ),v_{\delta };\mu \right ) =& f(v_{\delta },\mu ), \; \forall v_{\delta } \in \mathbb{V}_{\delta }\\
+a\left ( u_\delta (\mu ),v_\delta ;\mu \right ) =& f(v_\delta ,\mu ), \; \forall v_\delta  \in \mathbb{V}_\delta \\
 \end{align*}
-With $\mathbb{V}_{\delta } \subset \mathbb{V}$\\
-Hence, by setting $v=v_{\delta }$\\
-$$a\left ( u(\mu ),v_{\delta };\mu \right ) = a\left ( u_{\delta }(\mu ),v_{\delta };\mu \right )$$\\
-By linearity of $a$ we get the result.
+With $\mathbb{V}_\delta  \subset \mathbb{V}$ (Assumption \ref{assum:Vvect} )\\
+Hence, by setting $v=v_\delta $\\
+$$a\left ( u(\mu ),v_\delta ;\mu \right ) = a\left ( u_\delta (\mu ),v_\delta ;\mu \right )$$\\
+By linearity (Assumption \ref{assum:linear} ) we get the result.
 \end{proof}
 
 \begin{result}{Upper bound result p.10}
-$$ \| u(\mu )-u_{\delta }(\mu )\| _{\mathbb{V} } \leq \left( 1+\frac{\gamma (\mu )}{\alpha (\mu )} \right) \inf _{v_{\delta } \in \mathbb{V}_{\delta }}\| u(\mu )-v_{\delta }\| _{\mathbb{V} }$$
+$$ \| u(\mu )-u_\delta (\mu )\| _\mathbb{V}  \leq \left( 1+\frac{\gamma (\mu )}{\alpha (\mu )} \right) \inf _{v_\delta  \in \mathbb{V}_\delta }\| u(\mu )-v_\delta \| _\mathbb{V} $$
 \end{result}
+
 \begin{proof}
+By coercivity (Assumption \ref{assum:coerc} ):
+$$\alpha (\mu )\| u_ \delta (\mu )-v_\delta \|_\mathbb{V}^2 \leq a(u_ \delta (\mu )-v_\delta ,u_ \delta (\mu )-v_\delta ;\mu ) $$
+By linearity (Assumption \ref{assum:linear} ), using Galerkin Orthogonality (Result \ref{Galer_Orth}) and continuity (Assumption \ref{assum:cont} ):
+\begin{align*}
+a(u_ \delta (\mu )-v_\delta ,u_ \delta (\mu )-v_\delta ;\mu )=&a(u_ \delta (\mu )-u(\mu ) ,u_ \delta (\mu )-v_\delta ;\mu )+a(u(\mu )-v_\delta ,u_ \delta (\mu )-v_\delta ;\mu )\\
+=&a(u(\mu )-v_\delta ,u_ \delta (\mu )-v_\delta ;\mu )\\
+\leq &\gamma(\mu )\| u(\mu )-v_\delta \|_\mathbb{V} \| u_ \delta (\mu )-v_\delta \|_\mathbb{V}\\
+\Rightarrow \alpha (\mu )\| u_ \delta (\mu )-v_\delta \| _\mathbb{V} \leq& \gamma(\mu )\| u(\mu )-v_\delta \|_\mathbb{V}
+\end{align*}
+Thus, using this and the triangle inequality:
+\begin{align*}
+\| u(\mu )-u_\delta (\mu )\| _\mathbb{V}  \leq &\| u(\mu )-v_\delta \| _\mathbb{V} + \| v_\delta -u_\delta (\mu )\| _\mathbb{V},\; \forall v_\delta \in \mathbb{V}_\delta \\
+\leq &\left ( 1+\frac{\gamma (\mu )}{\alpha(\mu )}\right )\| u(\mu )-v_\delta \| _\mathbb{V},\; \forall v_\delta \in \mathbb{V}_\delta \\
+\leq &\left ( 1+\frac{\gamma (\mu )}{\alpha(\mu )}\right )\inf_{v_\delta \in \mathbb{V}_\delta }\| u(\mu )-v_\delta \| _\mathbb{V}\\
+\end{align*}
 
 \end{proof}
 
+\section*{Chapter 3}
+
+To do:
+\begin{itemize}
+\item assumptions needed\\
+\item POD Results p.21\\
+\item Theorem 3.2 and 3.3 p.24\\
+\end{itemize}
+
+
 \bibliographystyle{apalike.bst}
 \bibliography{proofs}
-%To have a bibliography, you need to compile with pdflatex, bibtex, pdflatex and pdflatex.}
+%To have the bibliography referenced, you need to compile with pdflatex, bibtex, pdflatex and pdflatex.
 
 \end{document}
