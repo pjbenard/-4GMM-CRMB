@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\newtheorem{result}{Result}
+
+\begin{document}
+
+\section*{Abstract}
+This Latex file is a record of all proofs done about the book \cite{hesthaven2016certified}.
+
+\section*{Chapter 2}
+
+\begin{result}{Galerkin Orthogonality p.9}
+$$ a\left( u(\mu )-u_{\delta }(\mu ),v_{\delta };\mu \right) = 0, \; \forall v_{\delta } \in \mathbb{V}_{\delta }$$
+\end{result}
+\begin{proof}
+We first remark we constructed:
+\begin{align*}
+a\left ( u(\mu ),v;\mu \right ) =& f(v,\mu ), \; \forall v \in \mathbb{V}\\
+a\left ( u_{\delta }(\mu ),v_{\delta };\mu \right ) =& f(v_{\delta },\mu ), \; \forall v_{\delta } \in \mathbb{V}_{\delta }\\
+\end{align*}
+With $\mathbb{V}_{\delta } \subset \mathbb{V}$\\
+Hence, by setting $v=v_{\delta }$\\
+$$a\left ( u(\mu ),v_{\delta };\mu \right ) = a\left ( u_{\delta }(\mu ),v_{\delta };\mu \right )$$\\
+By linearity of $a$ we get the result.
+\end{proof}
+
+\begin{result}{Upper bound result p.10}
+$$ \| u(\mu )-u_{\delta }(\mu )\| _{\mathbb{V} } \leq \left( 1+\frac{\gamma (\mu )}{\alpha (\mu )} \right) \inf _{v_{\delta } \in \mathbb{V}_{\delta }}\| u(\mu )-v_{\delta }\| _{\mathbb{V} }$$
+\end{result}
+\begin{proof}
+
+\end{proof}
+
+\bibliographystyle{apalike.bst}
+\bibliography{proofs}
+%To have a bibliography, you need to compile with pdflatex, bibtex, pdflatex and pdflatex.}
+
+\end{document}

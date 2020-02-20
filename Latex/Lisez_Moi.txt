@@ -1,0 +1,7 @@
+On ne partage que les codes latex (.tex) et les biblio (.bib) chacun se débrouille pour compiler en pdf et se créer ses propres fichiers .log, .aux et que sais-je encore.
+
+Pour le style de biblio (apalike.bst) chacun télécharge le sien et pas besoin de l'ajouter non plus!
+
+Liste et description des fichiers ajoutés (à compléter):
+proofs.tex : ensembles des preuves réalisées à partir du livre.
+proofs.bib : references de proofs.tex
