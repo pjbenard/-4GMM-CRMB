@@ -1,0 +1,9 @@
+#On utilise ce fichier gitignore pour ignorer les fichiers créés par latex lors des compilations (précaution supplémentaire au "Lisez-moi")
+
+apalike.bst
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+*.gz
