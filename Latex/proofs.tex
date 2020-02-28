@@ -81,6 +81,34 @@ To do:
 \item Theorem 3.2 and 3.3 p.24\\
 \end{itemize}
 
+\begin{result}{POD result p.21}
+\\
+The projection $P_N : \mathbb{V} \rightarrow \mathbb{V} _{POD}$ is given as
+$$ P_N[f] = \sum_{n=1}^N (f,\xi _n)_\mathbb{V} \xi _n $$
+and satisfies the following error estimate
+$$ \sqrt{ \frac{1}{M} \sum_{m=1}^M \|\psi_m -P_N[\psi_m]\|_\mathbb{V}^2} = \sqrt{\sum_{m=N+1}^M\lambda_m} $$
+\end{result}
+
+\begin{proof}
+The projection is defined as\\
+$$(P_N[f],\xi_n)\mathbb{V} = (f,\xi_n)\mathbb{V},\; 1\leq n\leq N$$
+By definition of $\mathbb{V}_{POD}$ the span of $(\xi_n)_{1\leq n\leq N}$\\
+\begin{align*}
+P_N[f] =& \sum_{n=1}^N (P_N[f],\xi_n)_\mathbb{V}\xi_n\\
+\Rightarrow P_N[f] =& \sum_{n=1}^N (f,\xi_n)_\mathbb{V}\xi_n\\
+\end{align*}
+\\
+Hence, we can calcul the estimation
+\begin{align*}
+\sqrt{ \frac{1}{M} \sum_{m=1}^M \|\psi_m -P_N[\psi_m]\|_\mathbb{V}^2} =& \sqrt{ \frac{1}{M} \sum_{m=1}^M \left\| \sum_{n=1}^M(\psi_m,\xi_n)_\mathbb{V} \xi_n- \sum_{k=1}^N (\psi_m,\xi_k)_\mathbb{V}\xi_k \right\| _\mathbb{V}^2}\\
+=& \sqrt{ \frac{1}{M} \sum_{m=1}^M \left\| \sum_{n=N+1}^M(\psi_m,\xi_n)_\mathbb{V} \xi_n \right\| _\mathbb{V}^2 }\\
+=& \sqrt{ \frac{1}{M} \sum_{m=1}^M \sum_{n=N+1}^M(\psi_m,\xi_n)_\mathbb{V}^2}\\
+=& \sqrt{ \sum_{n=N+1}^M(C(\xi_n),\xi_n)_\mathbb{V}}\\
+=& \sqrt{ \sum_{n=N+1}^M\lambda_n(\xi_n,\xi_n)_\mathbb{V}}\\
+=& \sqrt{ \sum_{n=N+1}^M\lambda_n}\\
+\end{align*}
+\end{proof}
+
 
 \bibliographystyle{apalike.bst}
 \bibliography{proofs}
