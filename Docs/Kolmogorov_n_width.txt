@@ -1,0 +1,11 @@
+Sobolev Spaces :
+- https://www.mscand.dk/article/view/18005
+- https://link.springer.com/article/10.1007/BF01890021
+
+Fourier series / Trigonomitric polynomials :
+- https://arxiv.org/pdf/1502.03117.pdf
+- https://www.oden.utexas.edu/media/reports/2008/0815.pdf
+
+Wavelets :
+- https://ieeexplore.ieee.org/document/510617
+- https://www.researchgate.net/publication/3316158_Kolmogorov_n-widths_and_wavelet_representations_for_signal_classes
