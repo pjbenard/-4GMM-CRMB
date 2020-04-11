@@ -1,0 +1,40 @@
+def offline_procedure(total_model_solver,reduced_basis_solver,ps,pre_computing,training_set,tol,l):
+    """ 
+    this function takes the problem and a sample of the parameter space and computes the reduced basis
+    (following greedy algorithm steps) that approximates the space (V_delta) so that the maximum error is less than the tolerance.
+    
+        function "total model solver" is the true solver.
+                                                Input: mu
+                                                Output: u_delta(mu)
+        function "reduced basis solver" solves the linear system A^mu_rb . u^mu_rb = f^mu_rb
+                                                Input: mu, T (pre_computed elements of A and f)
+                                                Output: u_rb(mu), s_rb(mu) = nu(mu)
+        function "ps" is the scalar product for normalization and orthogonalization.
+                                                Input: 2 vectors
+                                                Output: scalar_product result
+        function "pre computing" performs the precomputing step
+                                                Input: V,n (current V_rb basis)
+                                                Ouput: T (n partial A-matrices and f-vectors from affine assumption)
+        array "training set" is the sample of the parameter space
+        
+        float "tol" is the tolerance for stopping criteria
+        
+        integer "l" determines current vector length
+        
+    """
+    mu = training_set[0]
+    max_nu = np.Inf
+    V = base_orthonormee(l,ps)
+    while max_nu > tol:
+        #gram-schmidt pour que V ressemble à une base
+        V.add(total_model_solver(mu))
+        #pre-computing
+        T = pre_computing(V.matrix)
+        #calcul de u_rb(mu) pour tout les mu
+        max_nu = 0
+        for mu_loop in training_set :
+            u_rb,nu = reduced_basis_solver(T,mu_loop)
+            if max_nu < nu and nu > tol:
+                max_nu = nu
+                mu = mu_loop
+    return V
